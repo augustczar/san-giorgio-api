@@ -1,9 +1,12 @@
 package br.com.desafio.domain.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +20,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Payment {
-    @JsonProperty("client_id")
+@Entity
+@Table(name = "payments")
+public class Payment implements Serializable{
+	
+    private static final long serialVersionUID = -5079865167432197784L;
+	
     private String clientId;
-    @JsonProperty("payment_items")
+
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL)
     private List<PaymentItem> paymentItems;
 }

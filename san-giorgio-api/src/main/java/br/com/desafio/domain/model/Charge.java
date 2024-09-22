@@ -1,9 +1,11 @@
 package br.com.desafio.domain.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Charge {
+@Table(name = "charges")
+public class Charge implements Serializable {
+		
+    private static final long serialVersionUID = 152206435447184649L;
+	
     @Id
     private String id;
+    
     private BigDecimal amount;
 }
