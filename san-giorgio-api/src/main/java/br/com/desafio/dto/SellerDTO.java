@@ -14,6 +14,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SellerDTO {
-    private String id;
+    private Long id;
     private String name;
 }

@@ -16,6 +16,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChargeDTO {
-    private String id;
+    private Long id;
     private BigDecimal amount;
 }
