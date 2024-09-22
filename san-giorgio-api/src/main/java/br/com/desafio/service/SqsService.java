@@ -1,6 +1,6 @@
 package br.com.desafio.service;
 
-import br.com.desafio.domain.model.Payment;
+import br.com.desafio.dto.PaymentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,11 +22,11 @@ public class SqsService {
     @Value("${aws.sqs.queue-urls.excess}")
     private String excessQueueUrl;
 
-    public void sendToQueue(Payment payment, String type) {
+    public void sendToQueue(PaymentDTO paymentDTO, String type) {
         String queueUrl = getQueueUrl(type);
         SendMessageRequest sendMsgRequest = SendMessageRequest.builder()
                 .queueUrl(queueUrl)
-                .messageBody(payment.toString())
+                .messageBody(paymentDTO.toString())
                 .build();
         sqsClient.sendMessage(sendMsgRequest);
     }

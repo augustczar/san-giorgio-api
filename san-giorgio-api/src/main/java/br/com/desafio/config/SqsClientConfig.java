@@ -24,7 +24,9 @@ public class SqsClientConfig {
     SqsClient sqsClient() {
         return SqsClient.builder()
             .region(Region.of(region))
-            .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
+            .credentialsProvider(StaticCredentialsProvider
+            		.create(AwsBasicCredentials
+            				.create(accessKey, secretKey)))
             .build();
     }
 }
