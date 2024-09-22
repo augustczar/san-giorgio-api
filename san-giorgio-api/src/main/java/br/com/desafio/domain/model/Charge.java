@@ -3,6 +3,7 @@ package br.com.desafio.domain.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,11 @@ public class Charge implements Serializable {
 	    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-    
+    private Long id;
+
+    @Column(name = "charge_code", nullable = false)
+    private String chargeCode;
+
+    @Column(nullable = false, precision = 38, scale = 2)
     private BigDecimal amount;
 }

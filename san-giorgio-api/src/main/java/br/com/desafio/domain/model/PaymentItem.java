@@ -3,6 +3,7 @@ package br.com.desafio.domain.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,11 +34,16 @@ public class PaymentItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal paymentValue;
-    
-    private String paymentStatus;
+    @ManyToOne
+    @JoinColumn(name = "charge_id", nullable = false)
+    private Charge charge;
 
     @ManyToOne
-    @JoinColumn(name = "payment_id", nullable = false)
+    @JoinColumn(name = "payment_id", nullable = false)  // Aqui mapeamos a coluna de pagamento
     private Payment payment;
+
+    @Column(name = "amount_paid", nullable = false, precision = 38, scale = 2)
+    private BigDecimal amountPaid;
+    
+    private String paymentStatus;
 }

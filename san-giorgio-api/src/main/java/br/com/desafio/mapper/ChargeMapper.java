@@ -7,12 +7,15 @@ public class ChargeMapper {
 
     public static ChargeDTO toDTO(Charge charge) {
         return ChargeDTO.builder()
-                .id(charge.getId())
+                .chargeCode(charge.getChargeCode())
                 .amount(charge.getAmount())
                 .build();
     }
 
     public static Charge toEntity(ChargeDTO chargeDTO) {
-        return new Charge(chargeDTO.getId(), chargeDTO.getAmount());
+        Charge charge = new Charge();
+        charge.setChargeCode(chargeDTO.getChargeCode());
+        charge.setAmount(chargeDTO.getAmount());
+        return charge;
     }
 }

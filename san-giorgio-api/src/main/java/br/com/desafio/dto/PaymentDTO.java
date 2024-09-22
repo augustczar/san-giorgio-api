@@ -16,6 +16,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentDTO {
-    private String clientId;
+
+    private String sellerCode;
+    
     private List<PaymentItemDTO> paymentItems;
 }

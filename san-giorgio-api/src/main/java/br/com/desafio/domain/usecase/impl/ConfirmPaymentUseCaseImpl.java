@@ -23,24 +23,28 @@ public class ConfirmPaymentUseCaseImpl implements ConfirmPaymentUseCase {
 
     @Override
     public PaymentDTO confirm(PaymentDTO paymentDTO) {
-        if (!sellerRepository.existsById(paymentDTO.getClientId())) {
+        // Verificar se o vendedor existe pelo sellerCode
+        if (!sellerRepository.existsBySellerCode(paymentDTO.getSellerCode())) {
             throw new RuntimeException("Seller not found");
         }
 
+        // Iterar pelos itens de pagamento
         for (PaymentItemDTO item : paymentDTO.getPaymentItems()) {
-            if (!chargeRepository.existsById(item.getPaymentId())) {
+            // Verificar se a cobrança existe pelo chargeCode
+            if (!chargeRepository.existsByChargeCode(item.getChargeCode())) {
                 throw new RuntimeException("Charge code not found");
             }
 
-            Charge charge = chargeRepository.findById(item.getPaymentId())
+            Charge charge = chargeRepository.findByChargeCode(item.getChargeCode())
                     .orElseThrow(() -> new RuntimeException("Charge not found"));
 
             BigDecimal valorOriginal = charge.getAmount();
 
-            if (item.getPaymentValue().compareTo(valorOriginal) < 0) {
+            // Lógica para verificar status do pagamento
+            if (item.getAmountPaid().compareTo(valorOriginal) < 0) {
                 item.setPaymentStatus("partial");
                 sqsService.sendToQueue(paymentDTO, "partial");
-            } else if (item.getPaymentValue().compareTo(valorOriginal) == 0) {
+            } else if (item.getAmountPaid().compareTo(valorOriginal) == 0) {
                 item.setPaymentStatus("total");
                 sqsService.sendToQueue(paymentDTO, "total");
             } else {
@@ -52,3 +56,4 @@ public class ConfirmPaymentUseCaseImpl implements ConfirmPaymentUseCase {
         return paymentDTO;
     }
 }
+

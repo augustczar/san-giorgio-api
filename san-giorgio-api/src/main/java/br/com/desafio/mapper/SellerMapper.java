@@ -7,12 +7,15 @@ public class SellerMapper {
 
     public static SellerDTO toDTO(Seller seller) {
         return SellerDTO.builder()
-                .id(seller.getId())
+                .sellerCode(seller.getSellerCode())
                 .name(seller.getName())
                 .build();
     }
 
     public static Seller toEntity(SellerDTO sellerDTO) {
-        return new Seller(sellerDTO.getId(), sellerDTO.getName());
+        Seller seller = new Seller();
+        seller.setSellerCode(sellerDTO.getSellerCode());
+        seller.setName(sellerDTO.getName());
+        return seller;
     }
 }

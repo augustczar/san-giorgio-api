@@ -16,7 +16,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentItemDTO {
-    private String paymentId;
-    private BigDecimal paymentValue;
-    private String paymentStatus;
+    
+	private String chargeCode;
+    
+	private BigDecimal amountPaid;
+	
+	private String paymentStatus;
 }
