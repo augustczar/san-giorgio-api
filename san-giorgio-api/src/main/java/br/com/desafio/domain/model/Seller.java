@@ -1,6 +1,7 @@
 package br.com.desafio.domain.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,8 +27,8 @@ public class Seller implements Serializable {
 	private static final long serialVersionUID = -1127676901341693525L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(name = "seller_code", nullable = false)
     private String sellerCode;

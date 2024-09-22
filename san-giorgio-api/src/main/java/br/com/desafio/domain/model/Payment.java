@@ -3,6 +3,7 @@ package br.com.desafio.domain.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,8 +34,8 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = -5079865167432197784L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "seller_id", nullable = false)
