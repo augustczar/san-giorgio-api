@@ -1,0 +1,30 @@
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: '/sangiorgio/'
+
+spring:
+  application:
+    name: san-giorgio-api
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRE_URL}/sangiorgio
+    username: ${POSTGRE_USERNAME}
+    password: ${POSTGRE_PASSWORD}
+  
+  jpa:
+    show-sql: true
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+
+aws:
+  sqs:
+    region: your-region
+    access-key: your-access-key
+    secret-key: your-secret-key
+    queue-urls:
+      partial: https://sqs.your-region.amazonaws.com/your-account-id/partial-payments
+      total: https://sqs.your-region.amazonaws.com/your-account-id/total-payments
+      excess: https://sqs.your-region.amazonaws.com/your-account-id/excess-payments
