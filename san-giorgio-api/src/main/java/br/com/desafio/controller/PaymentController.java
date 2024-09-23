@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/payment")
+@RequestMapping("/api")
 public class PaymentController {
 
     private final ConfirmPaymentUseCase confirmPaymentUseCase;
 
-    @PutMapping
+    @PutMapping("/payment")
     public ResponseEntity<PaymentDTO> setPayment(@RequestBody PaymentDTO request) {
         PaymentDTO response = confirmPaymentUseCase.confirm(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
