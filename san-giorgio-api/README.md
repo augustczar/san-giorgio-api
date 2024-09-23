@@ -31,4 +31,5 @@ Este é um projeto Spring Boot que gerencia o processamento de pagamentos para v
 
 ## Configuração
 
-1. Clone o repositório:
+1. Clone o repositório: git@github.com:augustczar/san-giorgio-api.git
+

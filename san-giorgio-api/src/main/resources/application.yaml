@@ -7,6 +7,9 @@ spring:
   application:
     name: san-giorgio-api
 
+  profiles:
+    active: mock-sqs
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRE_URL}/sangiorgio
@@ -19,12 +22,26 @@ spring:
     hibernate:
       ddl-auto: update
 
+# application-mock-sqs.yaml
 aws:
   sqs:
-    region: your-region
-    access-key: your-access-key
-    secret-key: your-secret-key
+    region: us-east-1
+    access-key: fake-access-key
+    secret-key: fake-secret-key
     queue-urls:
-      partial: https://sqs.your-region.amazonaws.com/your-account-id/partial-payments
-      total: https://sqs.your-region.amazonaws.com/your-account-id/total-payments
-      excess: https://sqs.your-region.amazonaws.com/your-account-id/excess-payments
+      partial: http://localhost:4566/000000000000/partial-payments
+      total: http://localhost:4566/000000000000/total-payments
+      excess: http://localhost:4566/000000000000/excess-payments
+
+
+#aws:
+# sqs:
+#    enabled: false
+#    region: your-region
+#    access-key: your-access-key
+#    secret-key: your-secret-key
+#    queue-urls:
+#      partial: https://sqs.your-region.amazonaws.com/your-account-id/partial-payments
+#      total: https://sqs.your-region.amazonaws.com/your-account-id/total-payments
+#      excess: https://sqs.your-region.amazonaws.com/your-account-id/excess-payments
+
