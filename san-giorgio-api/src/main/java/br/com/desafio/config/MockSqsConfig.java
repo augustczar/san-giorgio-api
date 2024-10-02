@@ -1,6 +1,8 @@
 package br.com.desafio.config;
 
-import org.springframework.beans.factory.annotation.Value;
+
+import java.net.URI;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,25 +13,18 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sqs.SqsClient;
 
 @Configuration
-@Profile("!mock-sqs")
-public class SqsClientConfig {
-
-    @Value("${aws.sqs.access-key}")
-    private String accessKey;
-
-    @Value("${aws.sqs.secret-key}")
-    private String secretKey;
-
-    @Value("${aws.sqs.region}")
-    private String region;
+@Profile("mock-sqs")
+public class MockSqsConfig {
 
     @Bean
     SqsClient sqsClient() {
+        // Configura o cliente falso/mocado
         return SqsClient.builder()
-            .region(Region.of(region))
-            .credentialsProvider(StaticCredentialsProvider
-            		.create(AwsBasicCredentials
-            				.create(accessKey, secretKey)))
-            .build();
+                .region(Region.US_EAST_1)
+                .endpointOverride(URI.create("http://localhost:4566"))
+                .credentialsProvider(StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create("fake-access-key", "fake-secret-key")
+                ))
+                .build();
     }
 }

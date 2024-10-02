@@ -1,7 +1,5 @@
 package br.com.desafio.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,9 +13,9 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentDTO {
-
+public class SellerDTO {
+	
     private String sellerCode;
     
-    private List<PaymentItemDTO> paymentItems;
+    private String name;
 }
